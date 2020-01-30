@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs
+package com.vasilevkin.catsanddogs.network
 
 data class Dog(
     val message: Message,

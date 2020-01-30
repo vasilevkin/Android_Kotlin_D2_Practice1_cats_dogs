@@ -1,10 +1,13 @@
-package com.vasilevkin.catsanddogs
+package com.vasilevkin.catsanddogs.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.features.animalList.CatsAndDogsAdapter
+import com.vasilevkin.catsanddogs.models.Animal
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,8 +22,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         catsAndDogs = arrayListOf(
-            Animal("cat", "some cat"),
-            Animal("dog", "small dog")
+            Animal(
+                "hound",
+                "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_1777.jpg"
+            ),
+            Animal(
+                "hound-afghan",
+                "https://images.dog.ceo/breeds/terrier-wheaten/n02098105_1777.jpg"
+            )
         )
 
         // set up the RecyclerView
@@ -28,7 +37,8 @@ class MainActivity : AppCompatActivity() {
         layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
-        adapter = CatsAndDogsAdapter(this, catsAndDogs)
+        adapter =
+            CatsAndDogsAdapter(this, catsAndDogs)
         recyclerView.adapter = adapter
 
         val dividerItemDecoration = DividerItemDecoration(
