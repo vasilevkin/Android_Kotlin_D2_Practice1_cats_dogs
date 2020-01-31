@@ -14,7 +14,7 @@ import com.vasilevkin.catsanddogs.utils.downloadImageInView
 
 class CatsAndDogsAdapter
 internal constructor(context: Context, private val catsAndDogsDataset: List<Animal>) :
-    RecyclerView.Adapter<CatsAndDogsAdapter.CatsAndDogsViewHolder>() {
+    RecyclerView.Adapter<CatsAndDogsHolder>() {
 
     private val inflater: LayoutInflater
     private val con = context
@@ -23,13 +23,13 @@ internal constructor(context: Context, private val catsAndDogsDataset: List<Anim
         this.inflater = LayoutInflater.from(context)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatsAndDogsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatsAndDogsHolder {
         val view = inflater.inflate(R.layout.long_horizontal_item, parent, false)
-        return CatsAndDogsViewHolder(view)
+        return CatsAndDogsHolder(view)
     }
 
     // binds the data to the TextView in each row
-    override fun onBindViewHolder(holder: CatsAndDogsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CatsAndDogsHolder, position: Int) {
         val title = catsAndDogsDataset[position].title
 //        val description = catsAndDogsDataset[position].description
         val imageUrl = catsAndDogsDataset[position].imageUrl
@@ -46,16 +46,5 @@ internal constructor(context: Context, private val catsAndDogsDataset: List<Anim
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = catsAndDogsDataset.size
 
-    inner class CatsAndDogsViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        internal var titleTextView: TextView
-//        internal var descriptionTextView: TextView
-        internal var detailsImage: ImageView
-
-        init {
-            titleTextView = itemView.findViewById(R.id.title_text_view)
-//            descriptionTextView = itemView.findViewById(R.id.description_text_view)
-            detailsImage = itemView.findViewById(R.id.details_image)
-        }
-    }
 
 }
