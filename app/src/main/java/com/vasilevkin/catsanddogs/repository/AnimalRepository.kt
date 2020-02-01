@@ -1,38 +1,48 @@
 package com.vasilevkin.catsanddogs.repository
 
-import com.vasilevkin.catsanddogs.network.DogWebService
-import com.vasilevkin.catsanddogs.models.Animal
+import com.vasilevkin.catsanddogs.models.localModels.Animal
+import com.vasilevkin.catsanddogs.repository.dataSource.ICloudDataSource
 import io.reactivex.Single
 
+
 class AnimalRepository(
-    private val dogWebService: DogWebService
-) {
+    private val cloudDataSource: ICloudDataSource
+) : IAnimalRepository {
 
-    fun getAllAnimals(): Single<List<Animal>> {
-        return Single.just(arrayListOf(
-            Animal(
-                "test animal",
-                "some desc"
-            )
-        ))
-    }
+    override fun getAllAnimals(): Single<List<Animal>> {
+        return cloudDataSource.getAnimals().map {
+                it.map {
+                    Animal(null, it.photo.orEmpty())
+                }
+            }
+        }
 
-    fun getAllDogs(): Single<List<Animal>> {
-        return Single.just(arrayListOf(
-            Animal(
-                "test animal",
-                "some desc"
-            )
-        ))
-    }
 
-    fun getAllCats(): Single<List<Animal>> {
-        return Single.just(arrayListOf(
-            Animal(
-                "test animal",
-                "some desc"
-            )
-        ))
-    }
+//    fun getAllAnimals(): Single<List<Animal>> {
+//        return Single.just(arrayListOf(
+//            Animal(
+//                "test animal",
+//                "some desc"
+//            )
+//        ))
+//    }
+
+//    fun getAllDogs(): Single<List<Animal>> {
+//        return Single.just(arrayListOf(
+//            Animal(
+//                "test animal",
+//                "some desc"
+//            )
+//        ))
+//    }
+//
+//    fun getAllCats(): Single<List<Animal>> {
+//        return Single.just(arrayListOf(
+//            Animal(
+//                "test animal",
+//                "some desc"
+//            )
+//        ))
+//    }
 
 }
