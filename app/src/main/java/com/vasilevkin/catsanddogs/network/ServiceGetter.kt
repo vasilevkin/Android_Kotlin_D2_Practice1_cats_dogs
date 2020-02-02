@@ -1,5 +1,6 @@
 package com.vasilevkin.catsanddogs.network
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,7 +10,7 @@ object ServiceGetter {
 //    https://dog.ceo/api/breeds/image/random/3
 
     private val okCLientInstance: OkHttpClient = OkHttpClient.Builder()
-//        .addNetworkInterceptor(StethoInterceptor())
+        .addNetworkInterceptor(StethoInterceptor())
         .build()
 
     private val retrofitInstance: NetworkDataService = Retrofit.Builder()
