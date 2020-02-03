@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 
 data class AnimalsRemoteModel(
-    @SerializedName("message") val photo: String?
+    @SerializedName("message") val photo: List<String>
 )

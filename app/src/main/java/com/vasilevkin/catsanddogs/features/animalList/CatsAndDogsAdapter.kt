@@ -2,13 +2,10 @@ package com.vasilevkin.catsanddogs.features.animalList
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vasilevkin.catsanddogs.R
-import com.vasilevkin.catsanddogs.models.Animal
+import com.vasilevkin.catsanddogs.models.localModels.Animal
 import com.vasilevkin.catsanddogs.utils.downloadImageInView
 
 
