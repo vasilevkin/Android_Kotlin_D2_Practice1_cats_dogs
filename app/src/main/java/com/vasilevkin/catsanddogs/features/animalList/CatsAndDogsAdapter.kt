@@ -3,9 +3,7 @@ package com.vasilevkin.catsanddogs.features.animalList
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
-import com.example.delegateadapter.delegate.diff.IComparableItem
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.models.networkModels.CatImageRemoteModel
 import com.vasilevkin.catsanddogs.models.networkModels.CatRemoteModel
