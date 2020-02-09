@@ -11,6 +11,13 @@ import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
 import kotlinx.android.synthetic.main.activity_main.*
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +28,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        catList.layoutManager = LinearLayoutManager(this)
+
+        val manager = GridLayoutManager(this, 2)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position % 3 == 0) {
+                    2
+                } else {
+                    1
+                }
+            }
+        }
+        catList.layoutManager = manager
+//        catList.layoutManager = LinearLayoutManager(this)
 
         val catsApi = getDataServiceCommon()
 
