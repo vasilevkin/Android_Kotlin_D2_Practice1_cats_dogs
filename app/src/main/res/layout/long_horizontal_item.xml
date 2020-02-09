@@ -19,8 +19,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/details_image"
-        android:layout_toRightOf="@+id/details_image" android:layout_marginLeft="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_toRightOf="@+id/details_image"
         android:text="title"
-        android:textSize="20sp" />
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subtitle_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_text_view"
+        android:layout_marginLeft="20sp"
+        android:layout_toRightOf="@+id/details_image" />
 
 </RelativeLayout>
