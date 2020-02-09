@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.features.animalList.CatAdapter
+import com.vasilevkin.catsanddogs.models.networkModels.CatImageRemoteModel
 import com.vasilevkin.catsanddogs.models.networkModels.CatRemoteModel
 import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private var cats: List<CatRemoteModel> = emptyList()
+    private var cats: List<CatImageRemoteModel> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         catList.layoutManager = LinearLayoutManager(this)
 
         val catsApi = getDataServiceCommon()
-        val response = catsApi.getAllBreeds()
+
+        val response = catsApi.getBreedWithImages()
+//        val response = catsApi.getAllBreeds()
 
         response
             .observeOn(AndroidSchedulers.mainThread())

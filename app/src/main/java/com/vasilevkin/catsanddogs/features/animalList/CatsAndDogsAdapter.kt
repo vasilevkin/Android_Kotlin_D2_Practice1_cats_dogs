@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.models.networkModels.CatImageRemoteModel
 import com.vasilevkin.catsanddogs.models.networkModels.CatRemoteModel
+import com.vasilevkin.catsanddogs.utils.downloadImageInView
 import kotlinx.android.synthetic.main.long_horizontal_item.view.*
 
 
-class CatAdapter(private val breedList: List<CatRemoteModel>, private val context: Context) :
+class CatAdapter(private val breedList: List<CatImageRemoteModel>, private val context: Context) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -23,8 +25,15 @@ class CatAdapter(private val breedList: List<CatRemoteModel>, private val contex
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.itemView.title_text_view.text = breedList.get(position).name
-        holder.itemView.subtitle_text_view.text = breedList.get(position).origin
+        holder.itemView.title_text_view.text = breedList.get(position).breeds[0].name
+
+//        holder.itemView.title_text_view.text = breedList.get(position).name
+
+//        holder.itemView.subtitle_text_view.text = breedList.get(position).imageUrl
+        holder.itemView.subtitle_text_view.text = breedList.get(position).breeds[0].origin
+
+        downloadImageInView(context, holder.itemView.details_image, breedList.get(position).imageUrl)
+
     }
 
     override fun getItemCount() = breedList.size
