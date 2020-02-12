@@ -4,18 +4,18 @@ import com.google.gson.annotations.SerializedName
 
 
 data class CatRemoteModel(
-    @SerializedName("name") val name: String,
-    @SerializedName("origin") val origin: String,
-    @SerializedName("url") val imageUrl: String
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("origin") val origin: String? = null,
+    @SerializedName("url") val imageUrl: String? = null
 )
 
 
 data class CatImageRemoteModel(
-    @SerializedName("breeds") val breeds: List<Breeds>,
-    @SerializedName("url") val imageUrl: String
+    @SerializedName("breeds") val breeds: List<Breeds?>? = null,
+    @SerializedName("url") val imageUrl: String? = null
 )
 
 data class Breeds(
-    @SerializedName("name") val name: String,
-    @SerializedName("origin") val origin: String
+    @SerializedName("name") val name: String? = null,
+    @SerializedName("origin") val origin: String? = null
 )

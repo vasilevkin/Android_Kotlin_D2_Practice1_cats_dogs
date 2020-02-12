@@ -1,6 +1,6 @@
 package com.vasilevkin.catsanddogs.models.localModels
 
 data class Animal(
-    val title: String?,
-    val imageUrl: String
+    val title: String? = null,
+    val imageUrl: String? = null
 )
