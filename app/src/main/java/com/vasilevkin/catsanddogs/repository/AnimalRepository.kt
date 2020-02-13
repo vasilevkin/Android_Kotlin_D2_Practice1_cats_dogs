@@ -12,7 +12,7 @@ class AnimalRepository(
     override fun getAllAnimals(): Single<List<Animal>> {
         return cloudDataSource.getAnimals().map {
                 it.map {
-                    Animal(null, it.photo?.get(0)?.orEmpty())
+                    Animal(it.photo?.get(0)?.orEmpty())
                 }
             }
         }
