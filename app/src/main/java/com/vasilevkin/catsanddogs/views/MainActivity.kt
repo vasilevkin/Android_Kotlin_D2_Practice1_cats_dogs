@@ -1,32 +1,49 @@
 package com.vasilevkin.catsanddogs.views
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vasilevkin.catsanddogs.R
-import com.vasilevkin.catsanddogs.features.animalList.CatAdapter
-import com.vasilevkin.catsanddogs.models.networkModels.CatImageRemoteModel
-import com.vasilevkin.catsanddogs.models.networkModels.CatRemoteModel
+import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
+import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
+import com.vasilevkin.catsanddogs.features.animalList.LongHorizontalDelegateAdapter
+import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
 import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
 import kotlinx.android.synthetic.main.activity_main.*
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var cats: List<CatImageRemoteModel> = emptyList()
+    private var cats: List<IComparableItem> = emptyList()
+
+    private val diffAdapter by lazy {
+        DiffUtilCompositeAdapter.Builder()
+            .add(LongHorizontalDelegateAdapter())
+            .build()
+    }
+
+    private fun generateNewData() {
+        diffAdapter.swapData(prepareData())
+        catList.scrollToPosition(0)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        catList.run {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter  = diffAdapter
+            generateNewData()
+        }
+
+
 
 
         val manager = GridLayoutManager(this, 2)
@@ -39,22 +56,86 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        catList.layoutManager = manager
-//        catList.layoutManager = LinearLayoutManager(this)
+//        catList.layoutManager = manager
+        catList.layoutManager = LinearLayoutManager(this)
 
         val catsApi = getDataServiceCommon()
+
+        this.cats = prepareData()
+
 
         val response = catsApi.getBreedWithImages()
 //        val response = catsApi.getAllBreeds()
 
-        response
+        val disposable = response
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(IoScheduler())
-            .subscribe({ cats ->
-                this.cats = cats
-                catList.adapter = CatAdapter(cats, this)
-            })
+            .subscribe { cats ->
+                //                this.cats = cats
+        //                catList.adapter = CatAdapter(cats, this)
+
+
+                val objects = ArrayList<IComparableItem>(SIZE)
+                val random = Random()
+                for (i in 0 until cats.size) {
+                    val item: IComparableItem
+                    val type = random.nextInt(3)
+        //            if (type == 0) {
+                    item = LongHorizontalCatLocalModel(
+                        this@MainActivity,
+                        cats[i].breeds?.get(0)?.name!!,
+                        cats[i].breeds?.get(0)?.origin!!,
+                        cats[i].imageUrl!!
+                    )
+
+//                    item = LongHorizontalCatLocalModel(cats[i].breeds[0].name, cats[i].breeds[0].origin, "1")
+        //            } else if (type == 1) {
+        //                item = ImageViewModel("Title $i", R.mipmap.ic_launcher_round)
+        //            } else {
+        //                item = CheckViewModel("You still love this lib", true)
+        //            }
+                    objects.add(item)
+                }
+                this.cats = objects
+
+                            Log.d("a1:7", "this.cats = ${this.cats}")
+//                Log.d("a1:7", "this.cats = ${this.cats[0].tit}")
+
+                diffAdapter.swapData(objects)
+                catList.scrollToPosition(0)
+
+
+            }
     }
+
+
+     val SIZE = 20
+
+
+
+    fun prepareData(): List<IComparableItem> {
+        val objects = ArrayList<IComparableItem>(SIZE)
+        val random = Random()
+        for (i in 0 until SIZE) {
+            val item: IComparableItem
+            val type = random.nextInt(3)
+//            if (type == 0) {
+                item = LongHorizontalCatLocalModel(
+                    this,
+                    "Title $i",
+                    "Description $i",
+                    "1"
+                )
+//            } else if (type == 1) {
+//                item = ImageViewModel("Title $i", R.mipmap.ic_launcher_round)
+//            } else {
+//                item = CheckViewModel("You still love this lib", true)
+//            }
+            objects.add(item)
+        }
+        return objects
+    }
+    
 }
 
 
