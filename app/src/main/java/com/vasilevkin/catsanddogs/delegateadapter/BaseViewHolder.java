@@ -4,6 +4,9 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * @author dumchev on 04.11.17.
+ */
 public class BaseViewHolder extends RecyclerView.ViewHolder {
     private ItemInflateListener listener;
 
@@ -23,3 +26,4 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
         void inflated(Object viewType, View view);
     }
 }
+

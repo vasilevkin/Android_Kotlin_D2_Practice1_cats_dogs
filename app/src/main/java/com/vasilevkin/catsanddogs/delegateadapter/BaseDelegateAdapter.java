@@ -10,28 +10,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public abstract class BaseDelegateAdapter<VH extends BaseViewHolder, T> implements IDelegateAdapter<VH> {
+/**
+ * @author dumchev on 03.11.17.
+ */
+public abstract class BaseDelegateAdapter<VH extends BaseViewHolder, T> implements IDelegateAdapter<VH, T> {
 
-    abstract protected void onBindViewHolder(
-            @NonNull View view, @NonNull T item, @NonNull VH viewHolder);
+    abstract protected void onBindViewHolder(@NonNull View view,
+                                             @NonNull T item, @NonNull VH viewHolder);
 
     @LayoutRes
     abstract protected int getLayoutId();
 
+    /**
+     * @param parent inflated view
+     */
     @NonNull
     abstract protected VH createViewHolder(View parent);
 
     @Override
-    public void onRecycled(VH holder) {
+    public void onRecycled(@NonNull VH holder) {
     }
 
     @NonNull
     @Override
-    public final RecyclerView.ViewHolder onCreateViewHolder(
-            @NonNull ViewGroup parent, int viewType) {
-
-        final View inflatedView = LayoutInflater
-                .from(parent.getContext())
+    public final RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                            int viewType) {
+        final View inflatedView = LayoutInflater.from(parent.getContext())
                 .inflate(getLayoutId(), parent, false);
         final VH holder = createViewHolder(inflatedView);
         holder.setListener(new BaseViewHolder.ItemInflateListener() {
@@ -46,7 +50,7 @@ public abstract class BaseDelegateAdapter<VH extends BaseViewHolder, T> implemen
     @Override
     public final void onBindViewHolder(
             @NonNull VH holder,
-            @NonNull List<? extends Object> items,
+            @NonNull List<T> items,
             int position) {
         ((BaseViewHolder) holder).bind(items.get(position));
     }

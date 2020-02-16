@@ -9,58 +9,58 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompositeDelegateAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+/**
+ * @author dumchev on 03.11.17.
+ */
+public class CompositeDelegateAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = CompositeDelegateAdapter.class.getSimpleName();
     private static final int FIRST_VIEW_TYPE = 0;
 
     protected final SparseArray<IDelegateAdapter> typeToAdapterMap;
-    private @NonNull
-    List<? extends Object> data = new ArrayList<>();
+    protected final @NonNull List<T> data = new ArrayList<>();
 
-    protected CompositeDelegateAdapter(
-            @NonNull SparseArray<IDelegateAdapter> typeToAdapterMap) {
+    protected CompositeDelegateAdapter(@NonNull SparseArray<IDelegateAdapter> typeToAdapterMap) {
         this.typeToAdapterMap = typeToAdapterMap;
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public final int getItemViewType(int position) {
         for (int i = FIRST_VIEW_TYPE; i < typeToAdapterMap.size(); i++) {
             final IDelegateAdapter delegate = typeToAdapterMap.valueAt(i);
+            //noinspection unchecked
             if (delegate.isForViewType(data, position)) {
                 return typeToAdapterMap.keyAt(i);
             }
         }
-        throw new NullPointerException(
-                "Can not get viewType for position " + position);
+        throw new NullPointerException("Can not get viewType for position " + position);
     }
 
     @Override
-    public final RecyclerView.ViewHolder onCreateViewHolder(
-            ViewGroup parent, int viewType) {
-        return typeToAdapterMap.get(viewType)
-                .onCreateViewHolder(parent, viewType);
+    public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return typeToAdapterMap.get(viewType).onCreateViewHolder(parent, viewType);
     }
 
     @Override
-    public final void onBindViewHolder(
-            RecyclerView.ViewHolder holder, int position) {
-        final IDelegateAdapter delegateAdapter =
-                typeToAdapterMap.get(getItemViewType(position));
+    public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        final IDelegateAdapter delegateAdapter = typeToAdapterMap.get(getItemViewType(position));
         if (delegateAdapter != null) {
+            //noinspection unchecked
             delegateAdapter.onBindViewHolder(holder, data, position);
         } else {
-            throw new NullPointerException(
-                    "can not find adapter for position " + position);
+            throw new NullPointerException("can not find adapter for position " + position);
         }
     }
 
     @Override
-    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+        //noinspection unchecked
         typeToAdapterMap.get(holder.getItemViewType()).onRecycled(holder);
     }
 
-    public void swapData(@NonNull List<? extends Object> data) {
-        this.data = data;
+    public void swapData(@NonNull List<T> data) {
+        this.data.clear();
+        this.data.addAll(data);
         notifyDataSetChanged();
     }
 
@@ -69,7 +69,7 @@ public class CompositeDelegateAdapter extends RecyclerView.Adapter<RecyclerView.
         return data.size();
     }
 
-    public static class Builder {
+    public static class Builder<T> {
 
         private int count;
         private final SparseArray<IDelegateAdapter> typeToAdapterMap;
@@ -78,16 +78,14 @@ public class CompositeDelegateAdapter extends RecyclerView.Adapter<RecyclerView.
             typeToAdapterMap = new SparseArray<>();
         }
 
-        public Builder add(@NonNull IDelegateAdapter delegateAdapter) {
+        public Builder<T> add(@NonNull IDelegateAdapter<?, ? extends T> delegateAdapter) {
             typeToAdapterMap.put(count++, delegateAdapter);
             return this;
         }
 
-        public CompositeDelegateAdapter build() {
-            if (count == 0) {
-                throw new IllegalArgumentException("Register at least one adapter");
-            }
-            return new CompositeDelegateAdapter(typeToAdapterMap);
+        public CompositeDelegateAdapter<T> build() {
+            if (count == 0) throw new IllegalArgumentException("Register at least one adapter");
+            return new CompositeDelegateAdapter<>(typeToAdapterMap);
         }
     }
 }
