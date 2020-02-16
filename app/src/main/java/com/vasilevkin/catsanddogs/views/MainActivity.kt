@@ -9,7 +9,9 @@ import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.LongHorizontalDelegateAdapter
+import com.vasilevkin.catsanddogs.features.animalList.SquareDelegateAdapter
 import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
+import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
 import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.internal.schedulers.IoScheduler
@@ -25,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val diffAdapter by lazy {
         DiffUtilCompositeAdapter.Builder()
             .add(LongHorizontalDelegateAdapter())
+            .add(SquareDelegateAdapter())
             .build()
     }
 
@@ -56,8 +59,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-//        catList.layoutManager = manager
-        catList.layoutManager = LinearLayoutManager(this)
+        catList.layoutManager = manager
+//        catList.layoutManager = LinearLayoutManager(this)
 
         val catsApi = getDataServiceCommon()
 
@@ -80,20 +83,24 @@ class MainActivity : AppCompatActivity() {
                 for (i in 0 until cats.size) {
                     val item: IComparableItem
                     val type = random.nextInt(3)
-        //            if (type == 0) {
+                    if (type == 0) {
+//                    item = SquareCatLocalModel(
                     item = LongHorizontalCatLocalModel(
                         this@MainActivity,
                         cats[i].breeds?.get(0)?.name!!,
                         cats[i].breeds?.get(0)?.origin!!,
                         cats[i].imageUrl!!
                     )
-
-//                    item = LongHorizontalCatLocalModel(cats[i].breeds[0].name, cats[i].breeds[0].origin, "1")
-        //            } else if (type == 1) {
-        //                item = ImageViewModel("Title $i", R.mipmap.ic_launcher_round)
-        //            } else {
-        //                item = CheckViewModel("You still love this lib", true)
-        //            }
+//                    } else if (type == 1) {
+                    } else {
+                        item = SquareCatLocalModel(
+//                    item = LongHorizontalCatLocalModel(
+                            this@MainActivity,
+                            cats[i].breeds?.get(0)?.name!!,
+                            cats[i].breeds?.get(0)?.origin!!,
+                            cats[i].imageUrl!!
+                        )
+                                    }
                     objects.add(item)
                 }
                 this.cats = objects
@@ -120,7 +127,9 @@ class MainActivity : AppCompatActivity() {
             val item: IComparableItem
             val type = random.nextInt(3)
 //            if (type == 0) {
-                item = LongHorizontalCatLocalModel(
+
+            item = SquareCatLocalModel(
+//                item = LongHorizontalCatLocalModel(
                     this,
                     "Title $i",
                     "Description $i",
@@ -135,7 +144,7 @@ class MainActivity : AppCompatActivity() {
         }
         return objects
     }
-    
+
 }
 
 
