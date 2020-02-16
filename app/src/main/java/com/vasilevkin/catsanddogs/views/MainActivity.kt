@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
+import com.vasilevkin.catsanddogs.features.animalList.BigViewpagerDelegateAdapter
 import com.vasilevkin.catsanddogs.features.animalList.LongHorizontalDelegateAdapter
 import com.vasilevkin.catsanddogs.features.animalList.SquareDelegateAdapter
+import com.vasilevkin.catsanddogs.models.localModels.BigViewpagerLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
 import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
@@ -28,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         DiffUtilCompositeAdapter.Builder()
             .add(LongHorizontalDelegateAdapter())
             .add(SquareDelegateAdapter())
+            .add(BigViewpagerDelegateAdapter())
             .build()
     }
 
@@ -91,7 +94,14 @@ class MainActivity : AppCompatActivity() {
                         cats[i].breeds?.get(0)?.origin!!,
                         cats[i].imageUrl!!
                     )
-//                    } else if (type == 1) {
+                    } else if (type == 1) {
+                        item = BigViewpagerLocalModel(
+                            this@MainActivity,
+                            cats[i].breeds?.get(0)?.name!!,
+                            cats[i].breeds?.get(0)?.origin!!,
+                            cats[i].imageUrl!!
+                        )
+
                     } else {
                         item = SquareCatLocalModel(
 //                    item = LongHorizontalCatLocalModel(
