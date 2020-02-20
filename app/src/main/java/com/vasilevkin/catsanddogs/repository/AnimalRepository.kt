@@ -6,15 +6,16 @@ import io.reactivex.Single
 
 
 class AnimalRepository(
-    private val cloudDataSource: ICloudDataSource
+//    private val cloudDataSource: ICloudDataSource
 ) : IAnimalRepository {
 
     override fun getAllAnimals(): Single<List<Animal>> {
-        return cloudDataSource.getAnimals().map {
-                it.map {
-                    Animal(it.photo?.get(0)?.orEmpty())
-                }
-            }
+        return Single.just(listOf(Animal()))
+//        return cloudDataSource.getAnimals().map {
+//                it.map {
+//                    Animal(it.photo?.get(0)?.orEmpty())
+//                }
+//            }
         }
 
 
