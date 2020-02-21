@@ -5,26 +5,22 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.vasilevkin.catsanddogs.DependencyInjector
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
-import com.vasilevkin.catsanddogs.features.animalList.BigViewpagerDelegateAdapter
-import com.vasilevkin.catsanddogs.features.animalList.LongHorizontalDelegateAdapter
-import com.vasilevkin.catsanddogs.features.animalList.SquareDelegateAdapter
-import com.vasilevkin.catsanddogs.models.localModels.BigViewpagerLocalModel
-import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
+import com.vasilevkin.catsanddogs.features.animalList.*
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
-import com.vasilevkin.catsanddogs.utils.getDataServiceCommon
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.internal.schedulers.IoScheduler
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IMainContract.View {
 
     private var cats: List<IComparableItem> = emptyList()
+
+    private lateinit var presenter: IMainContract.Presenter
 
     private val diffAdapter by lazy {
         DiffUtilCompositeAdapter.Builder()
@@ -34,23 +30,24 @@ class MainActivity : AppCompatActivity() {
             .build()
     }
 
-    private fun generateNewData() {
-        diffAdapter.swapData(prepareData())
-        catList.scrollToPosition(0)
-    }
+    private val SIZE = 20
+
+// Lifecycle methods
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setPresenter(MainPresenter(this, DependencyInjector()))
+        presenter.onViewCreated()
+
+        this.cats = prepareData()
+
         catList.run {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter  = diffAdapter
+            adapter = diffAdapter
             generateNewData()
         }
-
-
-
 
         val manager = GridLayoutManager(this, 2)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -63,74 +60,37 @@ class MainActivity : AppCompatActivity() {
             }
         }
         catList.layoutManager = manager
-//        catList.layoutManager = LinearLayoutManager(this)
 
-        val catsApi = getDataServiceCommon()
-
-        this.cats = prepareData()
-
-
-        val response = catsApi.getBreedWithImages()
-//        val response = catsApi.getAllBreeds()
-
-        val disposable = response
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(IoScheduler())
-            .subscribe { cats ->
-                //                this.cats = cats
-        //                catList.adapter = CatAdapter(cats, this)
-
-
-                val objects = ArrayList<IComparableItem>(SIZE)
-                val random = Random()
-                for (i in 0 until cats.size) {
-                    val item: IComparableItem
-                    val type = random.nextInt(3)
-                    if (type == 0) {
-//                    item = SquareCatLocalModel(
-                    item = LongHorizontalCatLocalModel(
-                        this@MainActivity,
-                        cats[i].breeds?.get(0)?.name!!,
-                        cats[i].breeds?.get(0)?.origin!!,
-                        cats[i].imageUrl!!
-                    )
-                    } else if (type == 1) {
-                        item = BigViewpagerLocalModel(
-                            this@MainActivity,
-                            cats[i].breeds?.get(0)?.name!!,
-                            cats[i].breeds?.get(0)?.origin!!,
-                            cats[i].imageUrl!!
-                        )
-
-                    } else {
-                        item = SquareCatLocalModel(
-//                    item = LongHorizontalCatLocalModel(
-                            this@MainActivity,
-                            cats[i].breeds?.get(0)?.name!!,
-                            cats[i].breeds?.get(0)?.origin!!,
-                            cats[i].imageUrl!!
-                        )
-                                    }
-                    objects.add(item)
-                }
-                this.cats = objects
-
-                            Log.d("a1:7", "this.cats = ${this.cats}")
-//                Log.d("a1:7", "this.cats = ${this.cats[0].tit}")
-
-                diffAdapter.swapData(objects)
-                catList.scrollToPosition(0)
-
-
-            }
     }
 
+    override fun onDestroy() {
+        presenter.onDestroy()
+        super.onDestroy()
+    }
 
-     val SIZE = 20
+// IMainContract methods
 
+    override fun setPresenter(presenter: IMainContract.Presenter) {
+        this.presenter = presenter
+    }
 
+    override fun displayAnimals(list: List<IComparableItem>) {
+        this.cats = list
 
-    fun prepareData(): List<IComparableItem> {
+        Log.d("a1:7", "this.cats = ${this.cats}")
+
+        diffAdapter.swapData(cats)
+        catList.scrollToPosition(0)
+    }
+
+// Private methods
+
+    private fun generateNewData() {
+        diffAdapter.swapData(prepareData())
+        catList.scrollToPosition(0)
+    }
+
+    private fun prepareData(): List<IComparableItem> {
         val objects = ArrayList<IComparableItem>(SIZE)
         val random = Random()
         for (i in 0 until SIZE) {
@@ -140,11 +100,11 @@ class MainActivity : AppCompatActivity() {
 
             item = SquareCatLocalModel(
 //                item = LongHorizontalCatLocalModel(
-                    this,
-                    "Title $i",
-                    "Description $i",
-                    "1"
-                )
+                this,
+                "Title $i",
+                "Description $i",
+                "1"
+            )
 //            } else if (type == 1) {
 //                item = ImageViewModel("Title $i", R.mipmap.ic_launcher_round)
 //            } else {
@@ -154,7 +114,6 @@ class MainActivity : AppCompatActivity() {
         }
         return objects
     }
-
 }
 
 

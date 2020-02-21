@@ -1,5 +1,7 @@
 package com.vasilevkin.catsanddogs.features.animalList
 
+import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
+
 interface IMainContract {
 
     interface Presenter : IBasePresenter {
@@ -8,6 +10,7 @@ interface IMainContract {
     }
 
     interface View : IBaseView<Presenter> {
-        fun displayMoreAnimals()
+        fun displayAnimals(list: List<IComparableItem>)
+//        fun displayAnimals(list: Single<List<Animal>>)
     }
 }
