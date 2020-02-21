@@ -52,10 +52,10 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
         val manager = GridLayoutManager(this, 2)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return if (position % 3 == 0) {
-                    2
-                } else {
-                    1
+                return when (position % 4) {
+                    0 -> 2
+                    1, 2 -> 1
+                    else -> 2
                 }
             }
         }
