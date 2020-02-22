@@ -21,7 +21,7 @@ class MainPresenter(
 
     private var view: IMainContract.View? = view
 
-    private lateinit var disposable: Disposable
+    private var disposable: Disposable? = null
 
     // IMainContract methods
 
@@ -35,7 +35,7 @@ class MainPresenter(
 
     override fun onDestroy() {
         this.view = null
-        this.disposable.dispose()
+        this.disposable?.dispose()
     }
 
     // Private methods
