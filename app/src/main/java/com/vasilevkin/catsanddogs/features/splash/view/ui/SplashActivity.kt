@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs.splash.view.ui
+package com.vasilevkin.catsanddogs.features.splash.view.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
-import com.vasilevkin.catsanddogs.splash.ISplashContract
-import com.vasilevkin.catsanddogs.splash.presenter.SplashPresenter
+import com.vasilevkin.catsanddogs.features.splash.ISplashContract
+import com.vasilevkin.catsanddogs.features.splash.presenter.SplashPresenter
 
 
 /**

@@ -1,6 +1,6 @@
-package com.vasilevkin.catsanddogs.splash.presenter
+package com.vasilevkin.catsanddogs.features.splash.presenter
 
-import com.vasilevkin.catsanddogs.splash.ISplashContract
+import com.vasilevkin.catsanddogs.features.splash.ISplashContract
 
 
 class SplashPresenter(private var view: ISplashContract.View?) : ISplashContract.Presenter {

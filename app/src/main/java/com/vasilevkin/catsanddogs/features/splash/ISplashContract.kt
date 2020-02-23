@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs.splash
+package com.vasilevkin.catsanddogs.features.splash
 
 interface ISplashContract {
 
