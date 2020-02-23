@@ -1,12 +1,12 @@
 package com.vasilevkin.catsanddogs.features.animalList.presenter
 
 import android.app.Activity
-import com.vasilevkin.catsanddogs.IDependencyInjector
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
 import com.vasilevkin.catsanddogs.models.localModels.BigViewpagerLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
+import com.vasilevkin.catsanddogs.repository.AnimalRepository
 import com.vasilevkin.catsanddogs.repository.IAnimalRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -14,11 +14,12 @@ import io.reactivex.internal.schedulers.IoScheduler
 
 
 class MainPresenter(
-    view: IMainContract.View,
-    dependencyInjector: IDependencyInjector
+    view: IMainContract.View
+//    , dependencyInjector: IDependencyInjector
 ) : IMainContract.Presenter {
 
-    private val animalRepository: IAnimalRepository = dependencyInjector.animalRepository()
+    private val animalRepository: IAnimalRepository = AnimalRepository()
+//        dependencyInjector.animalRepository()
 
     private var view: IMainContract.View? = view
 

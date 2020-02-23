@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.vasilevkin.catsanddogs.DependencyInjector
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
 
     private var cats: List<IComparableItem> = emptyList()
 
-    private lateinit var presenter: IMainContract.Presenter
+    private var presenter: IMainContract.Presenter = MainPresenter(this)
 
     private val diffAdapter by lazy {
         DiffUtilCompositeAdapter.Builder()
@@ -42,12 +41,13 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setPresenter(
-            MainPresenter(
-                this,
-                DependencyInjector()
-            )
-        )
+//        setPresenter(
+//            MainPresenter(
+//                this
+//                ,
+//                DependencyInjector()
+//            )
+//        )
         presenter.onViewCreated()
 
         this.cats = prepareData()
@@ -79,9 +79,9 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
 
 // IMainContract methods
 
-    override fun setPresenter(presenter: IMainContract.Presenter) {
-        this.presenter = presenter
-    }
+//    override fun setPresenter(presenter: IMainContract.Presenter) {
+//        this.presenter = presenter
+//    }
 
     override fun displayAnimals(list: List<IComparableItem>) {
         this.cats = list
