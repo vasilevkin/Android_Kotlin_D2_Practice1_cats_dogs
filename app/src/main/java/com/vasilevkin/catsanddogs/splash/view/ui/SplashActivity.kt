@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs.views
+package com.vasilevkin.catsanddogs.splash.view.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
+import com.vasilevkin.catsanddogs.splash.ISplashContract
+import com.vasilevkin.catsanddogs.splash.presenter.SplashPresenter
 
 
 /**
@@ -15,7 +17,10 @@ import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
  * opens up in fullscreen mode. Once launched it waits for 2 seconds after which it opens the
  * MainActivity
  */
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(), ISplashContract.View {
+
+    private val splashPresenter: ISplashContract.Presenter = SplashPresenter(this)
+//            by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +39,19 @@ class SplashActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
             // Close this activity
-            finish()
+            splashPresenter.onViewCreated()
 
         }, 2000)
+    }
+
+    override fun finishView() {
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        splashPresenter.onViewDestroyed()
     }
 
     private fun makeFullScreen() {
