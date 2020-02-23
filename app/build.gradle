@@ -49,4 +49,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:3.8.0"
     implementation "com.squareup.okhttp3:logging-interceptor:3.8.0"
     testImplementation 'org.mockito:mockito-core:2.22.0'
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
 }
