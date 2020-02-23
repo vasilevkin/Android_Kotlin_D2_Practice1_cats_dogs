@@ -1,8 +1,9 @@
-package com.vasilevkin.catsanddogs.features.animalList
+package com.vasilevkin.catsanddogs.features.animalList.presenter
 
 import android.app.Activity
 import com.vasilevkin.catsanddogs.IDependencyInjector
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
+import com.vasilevkin.catsanddogs.features.animalList.IMainContract
 import com.vasilevkin.catsanddogs.models.localModels.BigViewpagerLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel

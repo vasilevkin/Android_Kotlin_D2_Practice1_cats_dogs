@@ -7,6 +7,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
 
 
 /**

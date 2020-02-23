@@ -1,10 +1,10 @@
-package com.vasilevkin.catsanddogs.features.animalList
+package com.vasilevkin.catsanddogs.unused_old
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-
-
-class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+//import android.view.View
+//import androidx.recyclerview.widget.RecyclerView
+//
+//
+//class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 
 //class CatsAndDogsHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {

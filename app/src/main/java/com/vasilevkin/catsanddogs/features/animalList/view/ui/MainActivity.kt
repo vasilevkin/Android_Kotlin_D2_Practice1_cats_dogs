@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs.views
+package com.vasilevkin.catsanddogs.features.animalList.view.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,11 @@ import com.vasilevkin.catsanddogs.DependencyInjector
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
-import com.vasilevkin.catsanddogs.features.animalList.*
+import com.vasilevkin.catsanddogs.features.animalList.IMainContract
+import com.vasilevkin.catsanddogs.features.animalList.presenter.MainPresenter
+import com.vasilevkin.catsanddogs.features.animalList.view.adapter.BigViewpagerDelegateAdapter
+import com.vasilevkin.catsanddogs.features.animalList.view.adapter.LongHorizontalDelegateAdapter
+import com.vasilevkin.catsanddogs.features.animalList.view.adapter.SquareDelegateAdapter
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -38,7 +42,12 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setPresenter(MainPresenter(this, DependencyInjector()))
+        setPresenter(
+            MainPresenter(
+                this,
+                DependencyInjector()
+            )
+        )
         presenter.onViewCreated()
 
         this.cats = prepareData()

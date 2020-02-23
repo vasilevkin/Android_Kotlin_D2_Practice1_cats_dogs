@@ -1,7 +1,7 @@
 package com.vasilevkin.catsanddogs
 
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
-import com.vasilevkin.catsanddogs.features.animalList.MainPresenter
+import com.vasilevkin.catsanddogs.features.animalList.presenter.MainPresenter
 import com.vasilevkin.catsanddogs.models.localModels.Animal
 import com.vasilevkin.catsanddogs.repository.IAnimalRepository
 import io.reactivex.Scheduler
@@ -35,7 +35,11 @@ class MainPresenterTest {
 
 //        mockMainActivity = StubMainActivity()
         MockitoAnnotations.initMocks(this)
-        presenter = MainPresenter(mockMainActivity, dependencyInjector)
+        presenter =
+            MainPresenter(
+                mockMainActivity,
+                dependencyInjector
+            )
     }
 
     @After

@@ -1,4 +1,4 @@
-package com.vasilevkin.catsanddogs.features.animalList
+package com.vasilevkin.catsanddogs.features.animalList.view.adapter
 
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.KDelegateAdapter
