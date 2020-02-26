@@ -51,4 +51,5 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:2.22.0'
     // Koin for Android
     implementation "org.koin:koin-android:$koin_version"
+    implementation 'com.google.android.material:material:1.1.0'
 }
