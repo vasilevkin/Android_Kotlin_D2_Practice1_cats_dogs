@@ -3,6 +3,7 @@ package com.vasilevkin.catsanddogs
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.vasilevkin.catsanddogs.di.animalListModule
+import com.vasilevkin.catsanddogs.di.splashModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +16,7 @@ class MainApplication : Application() {
         startKoin {
             androidContext(this@MainApplication)
             androidLogger()
-            modules(animalListModule)
+            modules(listOf(animalListModule, splashModule))
         }
 
 

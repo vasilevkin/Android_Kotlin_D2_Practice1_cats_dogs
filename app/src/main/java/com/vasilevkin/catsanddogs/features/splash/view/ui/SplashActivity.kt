@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
 import com.vasilevkin.catsanddogs.features.splash.ISplashContract
-import com.vasilevkin.catsanddogs.features.splash.presenter.SplashPresenter
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
 /**
@@ -19,7 +20,8 @@ import com.vasilevkin.catsanddogs.features.splash.presenter.SplashPresenter
  */
 class SplashActivity : AppCompatActivity(), ISplashContract.View {
 
-    private val splashPresenter: ISplashContract.Presenter = SplashPresenter(this)
+    private val splashPresenter: ISplashContract.Presenter by inject { parametersOf(this) }
+//    private val splashPresenter: ISplashContract.Presenter = SplashPresenter(this)
 //            by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
