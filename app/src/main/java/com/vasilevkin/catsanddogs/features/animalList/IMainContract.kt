@@ -9,7 +9,7 @@ interface IMainContract {
     {
         fun onViewCreated()
         fun onLoadMoreAnimalsTapped()
-            fun onDestroy()
+        fun onDestroy()
     }
 
     interface View

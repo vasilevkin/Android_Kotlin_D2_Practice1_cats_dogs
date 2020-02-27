@@ -2,13 +2,22 @@ package com.vasilevkin.catsanddogs
 
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.vasilevkin.catsanddogs.di.animalListModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //Start Koin
-//        startKoin(this, listOf(appDiModule))
+        // Start Koin
+        startKoin {
+            androidContext(this@MainApplication)
+            androidLogger()
+            modules(animalListModule)
+        }
+
 
         // Create an InitializerBuilder
         val initializerBuilder = Stetho.newInitializerBuilder(this)

@@ -9,12 +9,13 @@ import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
-import com.vasilevkin.catsanddogs.features.animalList.presenter.MainPresenter
 import com.vasilevkin.catsanddogs.features.animalList.view.adapter.BigViewpagerDelegateAdapter
 import com.vasilevkin.catsanddogs.features.animalList.view.adapter.LongHorizontalDelegateAdapter
 import com.vasilevkin.catsanddogs.features.animalList.view.adapter.SquareDelegateAdapter
 import com.vasilevkin.catsanddogs.models.localModels.SquareCatLocalModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -23,7 +24,8 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
 
     private var cats: List<IComparableItem> = emptyList()
 
-    private var presenter: IMainContract.Presenter = MainPresenter(this)
+    private val presenter: IMainContract.Presenter by inject { parametersOf(this) }
+//    private var presenter: IMainContract.Presenter = MainPresenter(this)
 
     private val diffAdapter by lazy {
         DiffUtilCompositeAdapter.Builder()
