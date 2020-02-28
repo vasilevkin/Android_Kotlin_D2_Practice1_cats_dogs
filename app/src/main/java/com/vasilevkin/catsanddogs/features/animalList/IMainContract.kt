@@ -2,20 +2,16 @@ package com.vasilevkin.catsanddogs.features.animalList
 
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 
+
 interface IMainContract {
 
-    interface Presenter
-//        : IBasePresenter
-    {
+    interface Presenter {
         fun onViewCreated()
         fun onLoadMoreAnimalsTapped()
         fun onDestroy()
     }
 
-    interface View
-//        : IBaseView<Presenter>
-    {
+    interface View {
         fun displayAnimals(list: List<IComparableItem>)
-//        fun displayAnimals(list: Single<List<Animal>>)
     }
 }

@@ -15,6 +15,7 @@ data class CatImageRemoteModel(
     @SerializedName("url") val imageUrl: String? = null
 )
 
+
 data class Breeds(
     @SerializedName("name") val name: String? = null,
     @SerializedName("origin") val origin: String? = null

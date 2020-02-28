@@ -3,6 +3,7 @@ package com.vasilevkin.catsanddogs.models.localModels
 import android.content.Context
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 
+
 class SquareCatLocalModel(
     val context: Context,
     val title: String,

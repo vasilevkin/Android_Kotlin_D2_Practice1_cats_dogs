@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 object ServiceGetter {
 
     private val loggingInterceptor = run {
@@ -31,30 +32,3 @@ object ServiceGetter {
         return retrofit.create(CatInterface::class.java)
     }
 }
-
-
-//    https://dog.ceo/api/breeds/image/random/3
-
-//    private val interceptor = run {
-//        val httpLoggingInterceptor = HttpLoggingInterceptor()
-//        httpLoggingInterceptor.apply {
-//            httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-//        }
-//    }
-//
-//    private val okCLientInstance: OkHttpClient = OkHttpClient.Builder()
-//        .addNetworkInterceptor(StethoInterceptor())
-//        .addNetworkInterceptor(interceptor)
-//        .build()
-//
-//    private val retrofitInstance: NetworkDataService = Retrofit.Builder()
-//        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//        .client(okCLientInstance)
-//        .addConverterFactory(GsonConverterFactory.create())
-//        .baseUrl("https://dog.ceo/")
-//        .build()
-//        .create(NetworkDataService::class.java)
-
-//    fun getDataService(): NetworkDataService {
-//        return retrofitInstance
-//    }

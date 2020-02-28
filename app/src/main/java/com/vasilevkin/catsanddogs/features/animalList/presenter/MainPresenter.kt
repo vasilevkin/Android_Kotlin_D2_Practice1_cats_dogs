@@ -16,11 +16,7 @@ import io.reactivex.internal.schedulers.IoScheduler
 class MainPresenter(
     view: IMainContract.View,
     private val animalRepository: IAnimalRepository
-//    , dependencyInjector: IDependencyInjector
 ) : IMainContract.Presenter {
-
-//    private val animalRepository: IAnimalRepository = AnimalRepository()
-//        dependencyInjector.animalRepository()
 
     private var view: IMainContract.View? = view
 
@@ -85,13 +81,6 @@ class MainPresenter(
                             )
                         )
                         else -> item = null
-//                        else -> item = BigViewpagerLocalModel(
-//                            view as Activity, arrayListOf(Animal(
-//                            cats[i].title ?: "Empty title",
-//                            cats[i].subtitle ?: "Empty subtitle",
-//                            cats[i].imageUrl ?: ""
-//                            ))
-//                        )
                     }
                     if (item != null) {
                         objects.add(item)
@@ -102,50 +91,3 @@ class MainPresenter(
             }
     }
 }
-
-
-//        val disposable = response
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(IoScheduler())
-//            .subscribe { cats ->
-//                //                this.cats = cats
-//                //                catList.adapter = CatAdapter(cats, this)
-//
-//
-//                val objects = ArrayList<IComparableItem>(20)
-//                val random = Random()
-//                for (i in 0 until cats.size) {
-//                    val item: IComparableItem
-//                    val type = random.nextInt(3)
-//                    if (type == 0) {
-////                    item = SquareCatLocalModel(
-//                        item = LongHorizontalCatLocalModel(
-//                            view as Activity,
-//                            cats[i].breeds?.get(0)?.name!!,
-//                            cats[i].breeds?.get(0)?.origin!!,
-//                            cats[i].imageUrl!!
-//                        )
-//                    } else if (type == 1) {
-//                        item = BigViewpagerLocalModel(
-//                            view as Activity,
-//                            cats[i].breeds?.get(0)?.name!!,
-//                            cats[i].breeds?.get(0)?.origin!!,
-//                            cats[i].imageUrl!!
-//                        )
-//
-//                    } else {
-//                        item = SquareCatLocalModel(
-////                    item = LongHorizontalCatLocalModel(
-//                            view as Activity,
-//                            cats[i].breeds?.get(0)?.name!!,
-//                            cats[i].breeds?.get(0)?.origin!!,
-//                            cats[i].imageUrl!!
-//                        )
-//                    }
-//                    objects.add(item)
-//                }
-////                return objects
-//
-//                view?.displayAnimals(objects)
-//
-//            }

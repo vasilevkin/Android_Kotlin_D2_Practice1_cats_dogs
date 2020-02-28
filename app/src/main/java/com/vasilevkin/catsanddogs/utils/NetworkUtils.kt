@@ -10,9 +10,6 @@ import com.vasilevkin.catsanddogs.network.ServiceGetter
 
 fun getDataServiceCommon(): CatInterface = ServiceGetter.getDataService()
 
-//fun getDataServiceCommon(): NetworkDataService = ServiceGetter.getDataService()
-
-
 fun downloadImageInView(context: Context, view: ImageView, url: String) {
     Glide
         .with(context)
