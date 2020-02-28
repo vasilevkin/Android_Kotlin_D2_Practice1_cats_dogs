@@ -6,6 +6,7 @@ import com.vasilevkin.catsanddogs.features.animalList.view.viewpager.AnimalsPage
 import com.vasilevkin.catsanddogs.models.localModels.BigViewpagerLocalModel
 import kotlinx.android.synthetic.main.big_viewpager_item.*
 
+
 class BigViewpagerDelegateAdapter : KDelegateAdapter<BigViewpagerLocalModel>() {
 
     private lateinit var pagerAdapter: AnimalsPagerAdapter
@@ -13,10 +14,6 @@ class BigViewpagerDelegateAdapter : KDelegateAdapter<BigViewpagerLocalModel>() {
     override fun onBind(item: BigViewpagerLocalModel, viewHolder: KDelegateAdapter.KViewHolder) {
 
         with(viewHolder) {
-            //            title_text_view.text = item.title
-//            subtitle_text_view.text = item.subtitle
-//            downloadImageInView(item.context, itemView.details_image, item.imageUrl)
-
             pagerAdapter = AnimalsPagerAdapter(item.context, item.animals)
             animal_view_pager.adapter = pagerAdapter
         }

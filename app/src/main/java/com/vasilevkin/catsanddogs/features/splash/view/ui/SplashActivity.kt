@@ -21,8 +21,6 @@ import org.koin.core.parameter.parametersOf
 class SplashActivity : AppCompatActivity(), ISplashContract.View {
 
     private val splashPresenter: ISplashContract.Presenter by inject { parametersOf(this) }
-//    private val splashPresenter: ISplashContract.Presenter = SplashPresenter(this)
-//            by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

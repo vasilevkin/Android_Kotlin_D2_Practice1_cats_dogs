@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_animal.view.*
 
 class AnimalsPagerAdapter(
     private val context: Context,
-//    fragmentManager: FragmentManager,
     private val animals: ArrayList<Animal>
 ) :
     PagerAdapter() {

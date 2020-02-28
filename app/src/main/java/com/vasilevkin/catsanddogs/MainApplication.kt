@@ -18,7 +18,7 @@ class MainApplication : Application() {
             androidLogger()
             modules(listOf(animalListModule, splashModule))
         }
-        
+
         // Create an InitializerBuilder
         val initializerBuilder = Stetho.newInitializerBuilder(this)
 

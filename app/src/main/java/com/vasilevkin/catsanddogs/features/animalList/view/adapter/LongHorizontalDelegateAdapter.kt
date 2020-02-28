@@ -7,6 +7,7 @@ import com.vasilevkin.catsanddogs.models.localModels.LongHorizontalCatLocalModel
 import kotlinx.android.synthetic.main.long_horizontal_item.*
 import kotlinx.android.synthetic.main.long_horizontal_item.view.*
 
+
 class LongHorizontalDelegateAdapter : KDelegateAdapter<LongHorizontalCatLocalModel>() {
 
     override fun onBind(item: LongHorizontalCatLocalModel, viewHolder: KViewHolder) =

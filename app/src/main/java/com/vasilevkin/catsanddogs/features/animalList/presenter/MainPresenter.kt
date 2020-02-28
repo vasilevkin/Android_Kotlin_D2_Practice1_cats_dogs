@@ -48,7 +48,7 @@ class MainPresenter(
             .subscribe { cats ->
                 val objects = ArrayList<IComparableItem>(20)
                 for (i in cats.indices) {
-                    var item: IComparableItem? = null
+                    var item: IComparableItem?
 
                     when (i % 6) {
                         0 -> item = LongHorizontalCatLocalModel(
