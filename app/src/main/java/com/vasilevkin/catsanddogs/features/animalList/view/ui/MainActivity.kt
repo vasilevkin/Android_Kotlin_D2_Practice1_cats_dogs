@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
             .build()
     }
 
-    private val SIZE = 20
+    private val size = 20
 
 // Lifecycle methods
 
@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
     }
 
     private fun prepareData(): List<IComparableItem> {
-        val objects = ArrayList<IComparableItem>(SIZE)
-        for (i in 0 until SIZE) {
+        val objects = ArrayList<IComparableItem>(size)
+        for (i in 0 until size) {
             val item = SquareCatLocalModel(
                 this,
                 "Title $i",

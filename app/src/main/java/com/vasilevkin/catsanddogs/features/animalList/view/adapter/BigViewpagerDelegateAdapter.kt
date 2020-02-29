@@ -11,7 +11,7 @@ class BigViewpagerDelegateAdapter : KDelegateAdapter<BigViewpagerLocalModel>() {
 
     private lateinit var pagerAdapter: AnimalsPagerAdapter
 
-    override fun onBind(item: BigViewpagerLocalModel, viewHolder: KDelegateAdapter.KViewHolder) {
+    override fun onBind(item: BigViewpagerLocalModel, viewHolder: KViewHolder) {
 
         with(viewHolder) {
             pagerAdapter = AnimalsPagerAdapter(item.context, item.animals)

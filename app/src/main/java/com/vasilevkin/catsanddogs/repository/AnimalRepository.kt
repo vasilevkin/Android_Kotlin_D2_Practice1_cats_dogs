@@ -14,7 +14,7 @@ class AnimalRepository : IAnimalRepository {
 
         return response
             .map { list ->
-                var arr = ArrayList<CatImageRemoteModel>(5)
+                val arr = ArrayList<CatImageRemoteModel>(5)
                 for (cat in list.indices) {
                     catsApi.getImageForBreedId(1, list[cat].breedId ?: "")
                         .subscribe { singleCatlist ->

@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:background="@color/colorAccent"
-        android:src="@android:drawable/ic_dialog_info" />
+        android:src="@android:drawable/ic_dialog_info"
+        android:contentDescription="@string/content_description" />
 
     <TextView
         android:id="@+id/title_text_view"

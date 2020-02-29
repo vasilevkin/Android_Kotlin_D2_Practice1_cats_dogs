@@ -10,7 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        android:src="@android:drawable/ic_dialog_info" />
+        android:src="@android:drawable/ic_dialog_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/content_description" />
 
     <TextView
         android:id="@+id/title_text_view"

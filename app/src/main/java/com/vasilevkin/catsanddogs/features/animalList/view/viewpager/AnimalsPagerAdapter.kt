@@ -18,7 +18,7 @@ class AnimalsPagerAdapter(
 ) :
     PagerAdapter() {
 
-    private val TAG = "AnimalsPagerAdapter"
+    private val tag = "AnimalsPagerAdapter"
     private var layoutInflater = LayoutInflater.from(context)
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -51,7 +51,7 @@ class AnimalsPagerAdapter(
             container.removeView(`object` as View)
             unbindDrawables(`object`)
         } catch (e: Exception) {
-            Log.w(TAG, "destroyItem: failed to destroy item and clear it's used resources", e)
+            Log.w(tag, "destroyItem: failed to destroy item and clear it's used resources", e)
         }
     }
 
