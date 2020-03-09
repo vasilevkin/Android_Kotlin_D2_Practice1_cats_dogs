@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="20dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/details_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/content_description" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
         app:layout_constraintStart_toEndOf="@+id/details_image"
         app:layout_constraintTop_toTopOf="@+id/details_image" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/subtitle_text_view"
         android:layout_width="wrap_content"
         android:layout_height="19dp"
