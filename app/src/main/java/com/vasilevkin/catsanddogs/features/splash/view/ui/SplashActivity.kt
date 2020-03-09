@@ -2,15 +2,16 @@ package com.vasilevkin.catsanddogs.features.splash.view.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.vasilevkin.catsanddogs.R
 import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
 import com.vasilevkin.catsanddogs.features.splash.ISplashContract
+import io.reactivex.Completable
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -29,19 +30,10 @@ class SplashActivity : AppCompatActivity(), ISplashContract.View {
 
         setContentView(R.layout.activity_splash)
 
-        // Using a handler to delay loading the MainActivity
-        Handler().postDelayed({
-
-            // Start activity
-            startActivity(Intent(this, MainActivity::class.java))
-
-            // Animate the loading of new activity
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-
-            // Close this activity
-            splashPresenter.onViewCreated()
-
-        }, 2000)
+        Completable.complete()
+            .delay(2, TimeUnit.SECONDS)
+            .doOnComplete { startMainActivity() }
+            .subscribe()
     }
 
     override fun finishView() {
@@ -66,5 +58,16 @@ class SplashActivity : AppCompatActivity(), ISplashContract.View {
 
         // Hide the toolbar
         supportActionBar?.hide()
+    }
+
+    private fun startMainActivity() {
+        // Start activity
+        startActivity(Intent(this, MainActivity::class.java))
+
+        // Animate the loading of new activity
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+
+        // Close this activity
+        splashPresenter.onViewCreated()
     }
 }
