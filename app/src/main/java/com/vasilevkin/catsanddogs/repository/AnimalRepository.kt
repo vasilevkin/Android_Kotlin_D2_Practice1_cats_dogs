@@ -18,7 +18,7 @@ class AnimalRepository : IAnimalRepository {
                 for (cat in list.indices) {
                     catsApi.getImageForBreedId(1, list[cat].breedId ?: "")
                         .subscribe { singleCatlist ->
-                            arr.add(singleCatlist[0])
+                            arr.add(singleCatlist.first())
                         }
                 }
                 return@map arr
