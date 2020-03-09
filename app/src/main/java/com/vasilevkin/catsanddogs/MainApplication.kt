@@ -20,17 +20,18 @@ class MainApplication : Application() {
         }
 
         // Create an InitializerBuilder
-        val initializerBuilder = Stetho.newInitializerBuilder(this)
+        val initializerBuilder = Stetho.newInitializerBuilder(this).also {
 
-        // Enable Chrome DevTools
-        initializerBuilder.enableWebKitInspector(
-            Stetho.defaultInspectorModulesProvider(this)
-        )
+            // Enable Chrome DevTools
+            it.enableWebKitInspector(
+                Stetho.defaultInspectorModulesProvider(this)
+            )
 
-        // Enable command line interface
-        initializerBuilder.enableDumpapp(
-            Stetho.defaultDumperPluginsProvider(this)
-        )
+            // Enable command line interface
+            it.enableDumpapp(
+                Stetho.defaultDumperPluginsProvider(this)
+            )
+        }
 
         // Use the InitializerBuilder to generate an Initializer
         val initializer = initializerBuilder.build()
