@@ -21,7 +21,5 @@ val animalListModule = module {
 
 val splashModule = module {
 
-    factory<ISplashContract.Presenter> { (view: ISplashContract.View) ->
-        SplashPresenter(view)
-    }
+    factory<ISplashContract.Presenter> { SplashPresenter() }
 }

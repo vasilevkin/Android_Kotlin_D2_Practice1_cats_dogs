@@ -4,8 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ProgressBar
 import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.base.BaseActivity
 import com.vasilevkin.catsanddogs.features.animalList.view.ui.MainActivity
 import com.vasilevkin.catsanddogs.features.splash.ISplashContract
 import io.reactivex.Completable
@@ -19,9 +20,9 @@ import java.util.concurrent.TimeUnit
  * opens up in fullscreen mode. Once launched it waits for 2 seconds after which it opens the
  * MainActivity
  */
-class SplashActivity : AppCompatActivity(), ISplashContract.View {
+class SplashActivity : BaseActivity<ISplashContract.Presenter>(), ISplashContract.View {
 
-    private val splashPresenter: ISplashContract.Presenter by inject { parametersOf(this) }
+    override val presenter: ISplashContract.Presenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +41,14 @@ class SplashActivity : AppCompatActivity(), ISplashContract.View {
         finish()
     }
 
+    override fun showError(msg: String) {
+        // show error
+    }
+
     override fun onDestroy() {
         super.onDestroy()
 
-        splashPresenter.onViewDestroyed()
+        presenter.onViewDestroyed()
     }
 
     private fun makeFullScreen() {
@@ -68,6 +73,9 @@ class SplashActivity : AppCompatActivity(), ISplashContract.View {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         // Close this activity
-        splashPresenter.onViewCreated()
+        presenter.onViewCreated()
     }
+
+    override val progressBar: ProgressBar
+        get() = ProgressBar(this)
 }
