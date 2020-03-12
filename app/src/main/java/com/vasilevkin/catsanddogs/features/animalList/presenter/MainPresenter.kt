@@ -1,6 +1,7 @@
 package com.vasilevkin.catsanddogs.features.animalList.presenter
 
 import android.app.Activity
+import com.vasilevkin.catsanddogs.base.BasePresenter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
 import com.vasilevkin.catsanddogs.models.localModels.Animal
@@ -16,9 +17,9 @@ import io.reactivex.internal.schedulers.IoScheduler
 class MainPresenter(
     view: IMainContract.View,
     private val animalRepository: IAnimalRepository
-) : IMainContract.Presenter {
+) : BasePresenter<IMainContract.View>(), IMainContract.Presenter {
 
-    private var view: IMainContract.View? = view
+    override var view: IMainContract.View? = view
 
     private var disposable: Disposable? = null
 

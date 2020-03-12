@@ -1,10 +1,11 @@
 package com.vasilevkin.catsanddogs.features.animalList.view.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ProgressBar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.base.BaseActivity
 import com.vasilevkin.catsanddogs.delegateadapter.diff.DiffUtilCompositeAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
@@ -17,10 +18,10 @@ import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
 
-class MainActivity : AppCompatActivity(), IMainContract.View {
+class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View {
 
     private var cats: List<IComparableItem> = emptyList()
-    private val presenter: IMainContract.Presenter by inject { parametersOf(this) }
+    override val presenter: IMainContract.Presenter by inject { parametersOf(this) }
 
     private val diffAdapter by lazy {
         DiffUtilCompositeAdapter.Builder()
@@ -76,6 +77,10 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
         catList.scrollToPosition(0)
     }
 
+    override fun showError(msg: String) {
+        // show error
+    }
+
 // Private methods
 
     private fun generateNewData() {
@@ -96,4 +101,7 @@ class MainActivity : AppCompatActivity(), IMainContract.View {
         }
         return objects
     }
+
+    override val progressBar: ProgressBar
+        get() = ProgressBar(this)
 }

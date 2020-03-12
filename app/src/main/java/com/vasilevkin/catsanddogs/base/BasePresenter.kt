@@ -3,7 +3,7 @@ package com.vasilevkin.catsanddogs.base
 
 abstract class BasePresenter<V : BaseContract.View> : BaseContract.Presenter {
 
-    protected var view: V? = null
+    open var view: V? = null
 
     override fun onViewCreated() {}
 
