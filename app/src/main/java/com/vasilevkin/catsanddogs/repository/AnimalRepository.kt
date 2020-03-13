@@ -16,7 +16,7 @@ class AnimalRepository : IAnimalRepository {
             .map { list ->
                 val arr = ArrayList<CatImageRemoteModel>(5)
                 for (cat in list.indices) {
-                    catsApi.getImageForBreedId(1, list[cat].breedId ?: "")
+                    catsApi.getImageForBreedId(1, list[cat].breedId.orEmpty())
                         .subscribe { singleCatlist ->
                             arr.add(singleCatlist.first())
                         }
@@ -28,7 +28,7 @@ class AnimalRepository : IAnimalRepository {
                     Animal(
                         it.breeds?.get(0)?.name,
                         it.breeds?.get(0)?.origin,
-                        it.imageUrl ?: ""
+                        it.imageUrl.orEmpty()
                     )
                 }
             }

@@ -54,30 +54,30 @@ class MainPresenter(
                     when (i % 6) {
                         0 -> item = LongHorizontalCatLocalModel(
                             view as Activity,
-                            cats[i].title ?: "Empty title",
-                            cats[i].subtitle ?: "Empty subtitle",
-                            cats[i].imageUrl ?: ""
+                            cats[i].title.orEmpty(),
+                            cats[i].subtitle.orEmpty(),
+                            cats[i].imageUrl.orEmpty()
                         )
                         1, 2 -> item = SquareCatLocalModel(
                             view as Activity,
-                            cats[i].title ?: "Empty title",
-                            cats[i].subtitle ?: "Empty subtitle",
-                            cats[i].imageUrl ?: ""
+                            cats[i].title.orEmpty(),
+                            cats[i].subtitle.orEmpty(),
+                            cats[i].imageUrl.orEmpty()
                         )
                         5 -> item = BigViewpagerLocalModel(
                             view as Activity, arrayListOf(
                                 Animal(
-                                    cats[i - 2].title ?: "Empty title",
-                                    cats[i - 2].subtitle ?: "Empty subtitle",
-                                    cats[i - 2].imageUrl ?: ""
+                                    cats[i - 2].title.orEmpty(),
+                                    cats[i - 2].subtitle.orEmpty(),
+                                    cats[i - 2].imageUrl.orEmpty()
                                 ), Animal(
-                                    cats[i - 1].title ?: "Empty title",
-                                    cats[i - 1].subtitle ?: "Empty subtitle",
-                                    cats[i - 1].imageUrl ?: ""
+                                    cats[i - 1].title.orEmpty(),
+                                    cats[i - 1].subtitle.orEmpty(),
+                                    cats[i - 1].imageUrl.orEmpty()
                                 ), Animal(
-                                    cats[i].title ?: "Empty title",
-                                    cats[i].subtitle ?: "Empty subtitle",
-                                    cats[i].imageUrl ?: ""
+                                    cats[i].title.orEmpty(),
+                                    cats[i].subtitle.orEmpty(),
+                                    cats[i].imageUrl.orEmpty()
                                 )
                             )
                         )
