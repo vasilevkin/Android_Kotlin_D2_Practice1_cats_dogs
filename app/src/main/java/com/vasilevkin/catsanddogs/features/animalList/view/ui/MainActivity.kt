@@ -33,6 +33,8 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
 
     private val size = 20
 
+    private val numberOfItemsInRecycler = 4
+
 // Lifecycle methods
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +54,7 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
         val manager = GridLayoutManager(this, 2)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return when (position % 4) {
+                return when (position % numberOfItemsInRecycler) {
                     0 -> 2
                     1, 2 -> 1
                     else -> 2
@@ -93,9 +95,9 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
         for (i in 0 until size) {
             val item = SquareCatLocalModel(
                 this,
-                "Title $i",
-                "Description $i",
-                "1"
+                getString(R.string.placeholder_item_imageurl) + "$i",
+                getString(R.string.placeholder_item_imageurl) + "$i",
+                getString(R.string.placeholder_item_imageurl)
             )
             objects.add(item)
         }
