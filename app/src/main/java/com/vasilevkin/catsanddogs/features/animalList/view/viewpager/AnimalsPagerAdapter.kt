@@ -7,19 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.vasilevkin.catsanddogs.R
+import com.vasilevkin.catsanddogs.features.animalList.IMainContract
 import com.vasilevkin.catsanddogs.models.localModels.Animal
 import com.vasilevkin.catsanddogs.utils.downloadImageInView
 import kotlinx.android.synthetic.main.fragment_animal.view.*
 
 
 class AnimalsPagerAdapter(
-    private val context: Context,
+    private val context: IMainContract.View?,
     private val animals: ArrayList<Animal>
 ) :
     PagerAdapter() {
 
     private val tag = "AnimalsPagerAdapter"
-    private var layoutInflater = LayoutInflater.from(context)
+    private var layoutInflater = LayoutInflater.from(context as Context)
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return (view == `object`)

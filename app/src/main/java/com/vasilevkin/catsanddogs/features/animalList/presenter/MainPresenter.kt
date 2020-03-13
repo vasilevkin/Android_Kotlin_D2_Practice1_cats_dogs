@@ -1,6 +1,5 @@
 package com.vasilevkin.catsanddogs.features.animalList.presenter
 
-import android.app.Activity
 import com.vasilevkin.catsanddogs.base.BasePresenter
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
@@ -55,19 +54,19 @@ class MainPresenter(
 
                     when (i % numberOfUniqueItems) {
                         0 -> item = LongHorizontalCatLocalModel(
-                            view as Activity,
+                            view,
                             cats[i].title.orEmpty(),
                             cats[i].subtitle.orEmpty(),
                             cats[i].imageUrl.orEmpty()
                         )
                         1, 2 -> item = SquareCatLocalModel(
-                            view as Activity,
+                            view,
                             cats[i].title.orEmpty(),
                             cats[i].subtitle.orEmpty(),
                             cats[i].imageUrl.orEmpty()
                         )
                         5 -> item = BigViewpagerLocalModel(
-                            view as Activity, arrayListOf(
+                            view, arrayListOf(
                                 Animal(
                                     cats[i - 2].title.orEmpty(),
                                     cats[i - 2].subtitle.orEmpty(),
