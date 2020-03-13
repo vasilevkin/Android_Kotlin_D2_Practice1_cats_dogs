@@ -23,6 +23,8 @@ class MainPresenter(
 
     private var disposable: Disposable? = null
 
+    private val numberOfUniqueItems = 6
+
     // IMainContract methods
 
     override fun onViewCreated() {
@@ -51,7 +53,7 @@ class MainPresenter(
                 for (i in cats.indices) {
                     var item: IComparableItem?
 
-                    when (i % 6) {
+                    when (i % numberOfUniqueItems) {
                         0 -> item = LongHorizontalCatLocalModel(
                             view as Activity,
                             cats[i].title.orEmpty(),
