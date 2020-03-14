@@ -22,5 +22,5 @@ class BigViewpagerDelegateAdapter : KDelegateAdapter<BigViewpagerLocalModel>() {
     override fun isForViewType(items: List<*>, position: Int) =
         items[position] is BigViewpagerLocalModel
 
-    override fun getLayoutId(): Int = R.layout.big_viewpager_item
+    override val layoutId: Int = R.layout.big_viewpager_item
 }

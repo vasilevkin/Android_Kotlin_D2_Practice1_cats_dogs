@@ -20,5 +20,5 @@ class LongHorizontalDelegateAdapter : KDelegateAdapter<LongHorizontalCatLocalMod
     override fun isForViewType(items: List<*>, position: Int) =
         items[position] is LongHorizontalCatLocalModel
 
-    override fun getLayoutId(): Int = R.layout.long_horizontal_item
+    override val layoutId: Int = R.layout.long_horizontal_item
 }

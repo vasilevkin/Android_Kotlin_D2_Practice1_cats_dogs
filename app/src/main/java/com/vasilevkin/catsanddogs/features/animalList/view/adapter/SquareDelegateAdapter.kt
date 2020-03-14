@@ -20,5 +20,5 @@ class SquareDelegateAdapter : KDelegateAdapter<SquareCatLocalModel>() {
     override fun isForViewType(items: List<*>, position: Int) =
         items[position] is SquareCatLocalModel
 
-    override fun getLayoutId(): Int = R.layout.square_item
+    override val layoutId: Int = R.layout.square_item
 }
