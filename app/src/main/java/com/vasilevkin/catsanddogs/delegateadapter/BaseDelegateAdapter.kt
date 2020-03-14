@@ -25,7 +25,11 @@ abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<V
         val inflatedView = LayoutInflater.from(parent.context)
             .inflate(layoutId, parent, false)
         val holder = createViewHolder(inflatedView)
-        holder!!.setListener { viewType, view -> onBindViewHolder(view, viewType as T, holder) }
+        holder!!.setListener ( object : BaseViewHolder.ItemInflateListener {
+            override fun inflated(viewType: Any?, view: View?) {
+                onBindViewHolder(view!!, viewType as T, holder)
+            }
+        })
         return holder
     }
 
