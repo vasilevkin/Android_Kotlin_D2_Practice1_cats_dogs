@@ -5,9 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 
 
-abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<VH, T> {
+abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem> {
 
     protected abstract fun onBindViewHolder(view: View, item: T, viewHolder: VH)
 
@@ -19,7 +20,7 @@ abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<V
      */
     protected abstract fun createViewHolder(parent: View): VH
 
-    override fun onRecycled(holder: VH) {}
+    override fun onRecycled(holder: RecyclerView.ViewHolder) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflatedView = LayoutInflater.from(parent.context)
@@ -33,7 +34,7 @@ abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<V
         return holder
     }
 
-    override fun onBindViewHolder(holder: VH, items: List<T>, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, items: List<IComparableItem>, position: Int) {
         (holder as BaseViewHolder).bind(items[position])
     }
 }

@@ -4,6 +4,7 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vasilevkin.catsanddogs.delegateadapter.CompositeDelegateAdapter;
 import com.vasilevkin.catsanddogs.delegateadapter.IDelegateAdapter;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class DiffUtilCompositeAdapter extends CompositeDelegateAdapter<IComparableItem> {
 
-    protected DiffUtilCompositeAdapter(@NonNull SparseArray<IDelegateAdapter> typeToAdapterMap) {
+    protected DiffUtilCompositeAdapter(@NonNull SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>> typeToAdapterMap) {
         super(typeToAdapterMap);
     }
 
@@ -32,14 +33,14 @@ public class DiffUtilCompositeAdapter extends CompositeDelegateAdapter<IComparab
     public static class Builder {
 
         private int count;
-        private final SparseArray<IDelegateAdapter> typeToAdapterMap;
+        private final SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>> typeToAdapterMap;
 
         public Builder() {
             typeToAdapterMap = new SparseArray<>();
         }
 
         public Builder add(
-            @NonNull IDelegateAdapter<?, ? extends IComparableItem> delegateAdapter) {
+            @NonNull IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem> delegateAdapter) {
             typeToAdapterMap.put(count++, delegateAdapter);
             return this;
         }

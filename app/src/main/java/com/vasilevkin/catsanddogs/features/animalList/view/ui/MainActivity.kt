@@ -20,7 +20,7 @@ import org.koin.core.parameter.parametersOf
 
 class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View {
 
-    private var cats: List<IComparableItem> = emptyList()
+    private var cats: MutableList<IComparableItem> = mutableListOf()
     override val presenter: IMainContract.Presenter by inject { parametersOf(this) }
 
     private val diffAdapter by lazy {
@@ -72,7 +72,7 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
 
 // IMainContract methods
 
-    override fun displayAnimals(list: List<IComparableItem>) {
+    override fun displayAnimals(list: MutableList<IComparableItem>) {
         this.cats = list
 
         diffAdapter.swapData(cats)
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
         catList.scrollToPosition(0)
     }
 
-    private fun prepareData(): List<IComparableItem> {
+    private fun prepareData(): MutableList<IComparableItem> {
         val objects = ArrayList<IComparableItem>(size)
         for (i in 0 until size) {
             val item = SquareCatLocalModel(
