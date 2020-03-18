@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 
 
-open class CompositeDelegateAdapter<T> constructor(val typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, T>>) :
+open class CompositeDelegateAdapter<T> constructor(private val typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, T>>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @JvmField
@@ -19,7 +19,7 @@ open class CompositeDelegateAdapter<T> constructor(val typeToAdapterMap: SparseA
                 return typeToAdapterMap.keyAt(i)
             }
         }
-        throw NullPointerException("Can not get viewType for position $position")
+        throw NullPointerException("[$TAG] Can not get viewType for position $position")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

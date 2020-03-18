@@ -7,7 +7,7 @@ import com.vasilevkin.catsanddogs.delegateadapter.CompositeDelegateAdapter
 import com.vasilevkin.catsanddogs.delegateadapter.IDelegateAdapter
 
 
-class DiffUtilCompositeAdapter protected constructor(typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>>) :
+class DiffUtilCompositeAdapter private constructor(typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>>) :
     CompositeDelegateAdapter<IComparableItem>(typeToAdapterMap) {
 
     override fun swapData(data: MutableList<IComparableItem>) {
@@ -20,7 +20,9 @@ class DiffUtilCompositeAdapter protected constructor(typeToAdapterMap: SparseArr
 
     class Builder {
         private var count = 0
-        private val typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>>
+        private val typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>> =
+            SparseArray()
+
         fun add(
             delegateAdapter: IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>
         ): Builder {
@@ -31,11 +33,6 @@ class DiffUtilCompositeAdapter protected constructor(typeToAdapterMap: SparseArr
         fun build(): DiffUtilCompositeAdapter {
             require(count != 0) { "Register at least one adapter" }
             return DiffUtilCompositeAdapter(typeToAdapterMap)
-        }
-
-        init {
-            typeToAdapterMap =
-                SparseArray()
         }
     }
 }

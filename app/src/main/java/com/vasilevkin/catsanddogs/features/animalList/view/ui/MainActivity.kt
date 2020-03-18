@@ -95,8 +95,8 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
         for (i in 0 until size) {
             val item = SquareCatLocalModel(
                 this,
-                getString(R.string.placeholder_item_imageurl) + "$i",
-                getString(R.string.placeholder_item_imageurl) + "$i",
+                getString(R.string.placeholder_item_title) + "$i",
+                getString(R.string.placeholder_item_subtitle) + "$i",
                 getString(R.string.placeholder_item_imageurl)
             )
             objects.add(item)

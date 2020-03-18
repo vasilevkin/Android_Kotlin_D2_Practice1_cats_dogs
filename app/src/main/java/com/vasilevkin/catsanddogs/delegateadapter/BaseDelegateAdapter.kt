@@ -28,7 +28,7 @@ abstract class BaseDelegateAdapter<VH : BaseViewHolder?, T> : IDelegateAdapter<R
         val holder = createViewHolder(inflatedView)
         holder!!.setListener ( object : BaseViewHolder.ItemInflateListener {
             override fun inflated(viewType: Any?, view: View?) {
-                onBindViewHolder(view!!, viewType as T, holder)
+                onBindViewHolder(view ?: return, viewType as T, holder)
             }
         })
         return holder

@@ -1,6 +1,5 @@
 package com.vasilevkin.catsanddogs.models.localModels
 
-import android.content.Context
 import com.vasilevkin.catsanddogs.delegateadapter.diff.IComparableItem
 import com.vasilevkin.catsanddogs.features.animalList.IMainContract
 
