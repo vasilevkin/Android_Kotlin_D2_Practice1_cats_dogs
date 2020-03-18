@@ -23,13 +23,7 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
     private var cats: List<IComparableItem> = emptyList()
     override val presenter: IMainContract.Presenter by inject { parametersOf(this) }
 
-    private val diffAdapter by lazy {
-        DiffUtilCompositeAdapter.Builder()
-            .add(LongHorizontalDelegateAdapter())
-            .add(SquareDelegateAdapter())
-            .add(BigViewpagerDelegateAdapter())
-            .build()
-    }
+    private lateinit var diffAdapter: DiffUtilCompositeAdapter
 
     private val size = 20
 
@@ -44,6 +38,12 @@ class MainActivity : BaseActivity<IMainContract.Presenter>(), IMainContract.View
         presenter.onViewCreated()
 
         this.cats = prepareData()
+
+        diffAdapter = DiffUtilCompositeAdapter.Builder()
+            .add(LongHorizontalDelegateAdapter())
+            .add(SquareDelegateAdapter())
+            .add(BigViewpagerDelegateAdapter())
+            .build()
 
         catList.run {
             layoutManager = LinearLayoutManager(this@MainActivity)
