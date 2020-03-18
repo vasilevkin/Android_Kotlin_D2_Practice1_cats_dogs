@@ -12,6 +12,6 @@ interface IMainContract {
     }
 
     interface View : BaseContract.View {
-        fun displayAnimals(list: MutableList<IComparableItem>)
+        fun displayAnimals(list: List<IComparableItem>)
     }
 }

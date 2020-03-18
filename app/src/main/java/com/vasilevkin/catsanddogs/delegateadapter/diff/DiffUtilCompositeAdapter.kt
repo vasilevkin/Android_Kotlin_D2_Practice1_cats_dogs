@@ -10,11 +10,10 @@ import com.vasilevkin.catsanddogs.delegateadapter.IDelegateAdapter
 class DiffUtilCompositeAdapter private constructor(typeToAdapterMap: SparseArray<IDelegateAdapter<RecyclerView.ViewHolder, IComparableItem>>) :
     CompositeDelegateAdapter<IComparableItem>(typeToAdapterMap) {
 
-    override fun swapData(data: MutableList<IComparableItem>) {
+    override fun swapData(data: List<IComparableItem>) {
         val diffCallback = DiffUtilCallback(this.data, data)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
-        this.data.clear()
-        this.data.addAll(data)
+        this.data = data
         diffResult.dispatchUpdatesTo(this)
     }
 

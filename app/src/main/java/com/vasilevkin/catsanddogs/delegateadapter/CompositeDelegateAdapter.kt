@@ -10,7 +10,7 @@ open class CompositeDelegateAdapter<T> constructor(private val typeToAdapterMap:
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     @JvmField
-    protected val data: MutableList<T> = ArrayList()
+    protected var data: List<T> = emptyList()
 
     override fun getItemViewType(position: Int): Int {
         for (i in FIRST_VIEW_TYPE until typeToAdapterMap.size()) {
@@ -40,9 +40,8 @@ open class CompositeDelegateAdapter<T> constructor(private val typeToAdapterMap:
         typeToAdapterMap[holder.itemViewType].onRecycled(holder)
     }
 
-    open fun swapData(data: MutableList<T>) {
-        this.data.clear()
-        this.data.addAll(data)
+    open fun swapData(data: List<T>) {
+        this.data = data
         notifyDataSetChanged()
     }
 
