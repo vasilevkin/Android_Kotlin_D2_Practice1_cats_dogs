@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 
-open class BaseViewHolder(parent: View?) : RecyclerView.ViewHolder(parent!!) {
+open class BaseViewHolder(parent: View) : RecyclerView.ViewHolder(parent) {
 
     private var listener: ItemInflateListener? = null
 
